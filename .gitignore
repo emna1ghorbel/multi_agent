@@ -1,0 +1,46 @@
+# Python cache and artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+.coverage.*
+.cache/
+htmlcov/
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Editor directories
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project artifacts
+agent-cti/checkpoints.db
+agent-cti/jobs_store.json
+agent-cti/dashboard.png
+agent-cti/cti_report.pdf
+
+# Data Processing Exclusions (Contains secrets/large binaries)
+Data_Processing/data/
+Data_Processing/cleaned_data/
+Data_Processing/faiss_cti_index/
+
+*.log
+*.bak

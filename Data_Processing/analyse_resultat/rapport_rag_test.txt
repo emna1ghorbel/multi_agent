@@ -1,0 +1,88 @@
+python src/test_rag_final.py
+✅ Index chargé : 75551 vecteurs
+════════════════════════════════════════════════════════════
+  TEST 1 : Questions hors-sujet (doit rejeter)
+════════════════════════════════════════════════════════════
+  ✅ PASS | 'hello how are you?'
+  ✅ PASS | 'what is the weather today?'
+  ✅ PASS | 'merci beaucoup'
+  ✅ PASS | 'hi'
+  ✅ PASS | 'who are you?'
+  ❌ FAIL (a retourné des sources) | 'tell me a joke'
+
+  Résultat : 5/6 rejetées
+
+════════════════════════════════════════════════════════════
+  TEST 2 : Questions CTI (doit répondre)
+════════════════════════════════════════════════════════════
+  ✅ PASS | 'What cracking tools are shared?'
+         Top: POST 573 | hackingandcrackingtools | Score: 0.670 | Sources: 5 | Replies: 15
+  ✅ PASS | 'What are dark method cloud logs?'
+         Top: POST 6490 | hacktheirsystem | Score: 0.924 | Sources: 5 | Replies: 3
+  ✅ PASS | 'What cloud logs are available?'
+         Top: POST 7663 | mailpassgroup | Score: 0.602 | Sources: 5 | Replies: 0
+  ✅ PASS | 'What stolen credentials are sold?'
+         Top: POST 6490 | hacktheirsystem | Score: 0.625 | Sources: 5 | Replies: 5
+  ✅ PASS | 'What pirated software is shared?'
+         Top: POST 6490 | hacktheirsystem | Score: 0.737 | Sources: 5 | Replies: 5
+  ✅ PASS | 'combo list mail pass'
+         Top: POST 1925 | paypallogsdataandleads | Score: 0.403 | Sources: 5 | Replies: 0
+  ✅ PASS | 'carding credit card stolen'
+         Top: POST 772 | hubhacking | Score: 0.684 | Sources: 5 | Replies: 5
+  ✅ PASS | 'android malware telegram'
+         Top: POST 11593 | rbmods | Score: 0.579 | Sources: 5 | Replies: 15
+
+  Résultat : 8/8 réussis
+
+════════════════════════════════════════════════════════════
+  TEST 3 : Anti-hallucination (doit avouer ignorance)
+════════════════════════════════════════════════════════════
+  ✅ PASS (avoue manque de données) | 'What ransomware attacks target hospitals in Japan?'
+  ✅ PASS (avoue manque de données) | 'Which APT groups use zero-day exploits on Linux?'
+  ✅ PASS (avoue manque de données) | 'Tell me about North Korean hackers on Telegram'
+  ✅ PASS (aucune source) | 'What are the latest CVE vulnerabilities in Apache?'
+
+  Résultat : 4/4 honnêtes
+
+════════════════════════════════════════════════════════════
+  TEST 4 : Cohérence sources citées vs retournées
+════════════════════════════════════════════════════════════
+
+  Question : 'What cracking tools are shared?'
+  Sources retournées : {'573', '670', '3688', '6490', '1013'}
+  Sources citées LLM : {'6490', '3688'}
+    ✅ POST 6490 cité et présent
+    ✅ POST 3688 cité et présent
+
+  Question : 'What are dark method cloud logs?'
+  Sources retournées : {'7663', '3688', '4703', '381', '6490'}
+  Sources citées LLM : {'381', '6490', '3688'}
+    ✅ POST 381 cité et présent
+    ✅ POST 6490 cité et présent
+    ✅ POST 3688 cité et présent
+
+  Résultat : 5/5 citations cohérentes
+
+════════════════════════════════════════════════════════════
+  TEST 5 : Récupération des replies (engagement)
+════════════════════════════════════════════════════════════
+  POST 6490 | hacktheirsystem | No replies
+  POST 3688 | thehackerexploits | No replies
+  POST 4703 | ottmixapk | No replies
+  POST 381 | hackingandcrackingtools | Replies: 3
+  POST 7663 | mailpassgroup | No replies
+
+  Total replies récupérées : 3
+  Note : Les replies indiquent l'ENGAGEMENT
+         communautaire, pas la qualité du post
+
+════════════════════════════════════════════════════════════
+  📊 RÉSUMÉ GLOBAL
+════════════════════════════════════════════════════════════
+  TEST 1 : Hors-sujet        5/6  (83%)   ✅
+  TEST 2 : CTI pertinent     8/8  (100%)  ✅
+  TEST 3 : Anti-hallucination 4/4  (100%) ✅
+  TEST 4 : Cohérence sources 5/5  (100%)  ✅
+  TEST 5 : Replies           3 récupérées ✅
+
+  SCORE GLOBAL : EXCELLENT
